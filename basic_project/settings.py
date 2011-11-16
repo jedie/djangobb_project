@@ -45,6 +45,7 @@ LANGUAGES = (
     ('it', 'Italian'),
     ('lt', 'Lithuanian'),
     ('mn', 'Mongolian'),
+    ('nl', 'Dutch'),
     ('pl', 'Polish'),
     ('ru', 'Russian'),
     ('uk_UA', 'Ukrainian'),
