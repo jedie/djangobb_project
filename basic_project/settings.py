@@ -161,6 +161,7 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     'django.contrib.admin',
     'django.contrib.admindocs',
+    'django.contrib.humanize',
     'registration',
     'pagination',
     'django_authopenid',
