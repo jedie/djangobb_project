@@ -6,16 +6,6 @@ from sitemap import SitemapForum, SitemapTopic
 from forms import RegistrationFormUtfUsername
 from djangobb_forum import settings as forum_settings
 
-# HACK for add default_params with RegistrationFormUtfUsername and backend to registration urlpattern
-# Must be changed after django-authopenid #50 (signup-page-does-not-work-whih-django-registration)
-# will be fixed
-from django_authopenid.urls import urlpatterns as authopenid_urlpatterns
-for i, rurl in enumerate(authopenid_urlpatterns):
-    if rurl.name == 'registration_register':
-        authopenid_urlpatterns[i].default_args.update({'form_class': RegistrationFormUtfUsername,
-                                                  'backend': 'registration.backends.default.DefaultBackend'})
-    elif rurl.name == 'registration_activate':
-                authopenid_urlpatterns[i].default_args = {'backend': 'registration.backends.default.DefaultBackend'}
 
 admin.autodiscover()
 
@@ -27,12 +17,12 @@ sitemaps = {
 urlpatterns = patterns('',
     # Admin
     (r'^admin/', include(admin.site.urls)),
-    
+
     # Sitemap
     (r'^sitemap.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
-    
+
     # Apps
-    (r'^forum/account/', include(authopenid_urlpatterns)),
+    (r'^forum/account/', include('django_authopenid.urls')),
     (r'^forum/', include('djangobb_forum.urls', namespace='djangobb')),
 )
 
