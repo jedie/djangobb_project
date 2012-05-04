@@ -1,3 +1,4 @@
 Whoosh
 django-registration==0.8
 https://bitbucket.org/benoitc/django-authopenid/get/tip.tar.gz
+https://github.com/arneb/django-messages/tarball/master#egg=django-messages

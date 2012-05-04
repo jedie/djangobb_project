@@ -29,7 +29,7 @@ urlpatterns = patterns('',
 # PM Extension
 if (forum_settings.PM_SUPPORT):
     urlpatterns += patterns('',
-        (r'^forum/pm/', include('messages.urls')),
+        (r'^forum/pm/', include('django_messages.urls')),
    )
 
 if (settings.DEBUG):

@@ -162,7 +162,7 @@ INSTALLED_APPS = (
     'django_authopenid',
     'djangobb_forum',
     'haystack',
-    'messages',
+    'django_messages',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -219,7 +219,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.messages.context_processors.messages',
     'django_authopenid.context_processors.authopenid',
-    'messages.context_processors.inbox',
+    'django_messages.context_processors.inbox',
     'djangobb_forum.context_processors.forum_settings',
 )
 
