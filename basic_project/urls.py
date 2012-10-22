@@ -32,8 +32,22 @@ if (forum_settings.PM_SUPPORT):
         (r'^forum/pm/', include('django_messages.urls')),
    )
 
-if (settings.DEBUG):
+# serve static files
+if settings.RUN_WITH_DEV_SERVER and "--insecure" in sys.argv and "--nostatic" in sys.argv:
+    # The automatic static serve is without index views.
+    # We add 'django.views.static.serve' here, to add show_indexes==True
+    #
+    # The developer server must be start with --insecure and --nostatic e.g.:
+    #     ./manage.py runserver --insecure --nostatic
+    #
+    # https://docs.djangoproject.com/en/1.4/ref/contrib/staticfiles/#runserver
+    print " *** Serve static files from %r at %r ***" % (settings.STATIC_ROOT, settings.STATIC_URL)
     urlpatterns += patterns('',
-        (r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'),
-            'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
+        url('^%s/(?P<path>.*)$' % settings.STATIC_URL.strip("/"), 'django.views.static.serve',
+            {'document_root': settings.STATIC_ROOT, 'show_indexes': True}),
+    )
+    print " *** Serve media files from %r at %r ***" % (settings.MEDIA_ROOT, settings.MEDIA_URL)
+    urlpatterns += patterns('',
+        url('^%s/(?P<path>.*)$' % settings.MEDIA_URL.strip("/"), 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT, 'show_indexes': True}),
     )
