@@ -1,10 +1,15 @@
-from django.conf.urls.defaults import *
+# coding: utf-8
+
+import sys
+
 from django.conf import settings
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from sitemap import SitemapForum, SitemapTopic
-from forms import RegistrationFormUtfUsername
 from djangobb_forum import settings as forum_settings
+from forms import RegistrationFormUtfUsername
+from sitemap import SitemapForum, SitemapTopic
+
 
 
 admin.autodiscover()

@@ -1,5 +1,7 @@
-# -*- coding: utf-8 -*-
-import os.path
+# coding: utf-8
+
+import os
+import sys
 
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -15,11 +17,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': '', # Or path to database file if using sqlite3.
+        'USER': '', # Not used with sqlite3.
+        'PASSWORD': '', # Not used with sqlite3.
+        'HOST': '', # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '', # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -99,17 +101,18 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
-# Make this unique, and don't share it with anybody.
-
+# A secret key for this particular Django installation.
+# Used to provide a seed in secret-key hashing algorithms.
+# Set this to a random string -- the longer, the better.
 if not hasattr(globals(), 'SECRET_KEY'):
     SECRET_FILE = os.path.join(PROJECT_ROOT, 'secret.txt')
     try:
-        SECRET_KEY = open(SECRET_FILE).read().strip()
+        SECRET_KEY = open(SECRET_FILE, "r").read().strip()
     except IOError:
         try:
             from random import choice
             import string
-            symbols = ''.join((string.lowercase, string.digits, string.punctuation ))
+            symbols = ''.join((string.lowercase, string.digits, string.punctuation))
             SECRET_KEY = ''.join([choice(symbols) for i in range(50)])
             secret = file(SECRET_FILE, 'w')
             secret.write(SECRET_KEY)
