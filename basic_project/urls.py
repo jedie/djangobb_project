@@ -7,9 +7,16 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
 from djangobb_forum import settings as forum_settings
-from forms import RegistrationFormUtfUsername
 from sitemap import SitemapForum, SitemapTopic
 
+
+# HACK for add default_params with RegistrationFormUniqueEmail to registration urlpattern
+# So registration only works with a unique email address
+from django_authopenid.urls import urlpatterns as authopenid_urlpatterns
+from registration.forms import RegistrationFormUniqueEmail
+for i, rurl in enumerate(authopenid_urlpatterns):
+    if rurl.name == 'registration_register':
+        authopenid_urlpatterns[i].default_args.update({'form_class': RegistrationFormUniqueEmail})
 
 
 admin.autodiscover()
