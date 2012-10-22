@@ -1,0 +1,12 @@
+/.git
+local_settings.py
+secret.txt
+*.py[co]
+*.log
+*~
+*.egg-info
+/dist
+/build
+*.db3
+.pydevproject
+/.settings
